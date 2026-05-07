@@ -9,6 +9,7 @@ function makePageForEpisodes(episodeList) {
   document.body.appendChild(search);
   const searchInput = document.createElement("input");
   search.appendChild(searchInput);
+  searchInput.placeholder = "Search for an episode...";
   const rootElem = document.createElement("div");
   document.body.appendChild(rootElem);
   const copyWriter = document.createElement("div");
