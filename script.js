@@ -10,6 +10,10 @@ function makePageForEpisodes(episodeList) {
   const searchInput = document.createElement("input");
   search.appendChild(searchInput);
   searchInput.placeholder = "Search for an episode...";
+  const searchCount = document.createElement("span");
+  search.appendChild(searchCount);
+  searchCount.style.marginLeft = "10px";
+  searchCount.textContent = `Displaying ${episodeList.length} / ${episodeList.length}`;
   const rootElem = document.createElement("div");
   document.body.appendChild(rootElem);
   const copyWriter = document.createElement("div");
@@ -37,6 +41,22 @@ function makePageForEpisodes(episodeList) {
       <p>${episode.summary}</p>
     `;
     rootElem.appendChild(episodeElem);
+    const searchInput = document.querySelector("input");
+    searchInput.addEventListener("input", (event) => {
+      const searchTerm = event.target.value.toLowerCase();
+      if (
+        episode.name.toLowerCase().includes(searchTerm) ||
+        episode.summary.toLowerCase().includes(searchTerm)
+      ) {
+        episodeElem.style.display = "block";
+      } else {
+        episodeElem.style.display = "none";
+      }
+      const visibleEpisodes = document.querySelectorAll(
+        ".episode:not([style*='display: none'])",
+      );
+      searchCount.textContent = ` ${visibleEpisodes.length} / ${episodeList.length}`;
+    });
   });
 }
 window.onload = setup;
