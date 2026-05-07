@@ -5,19 +5,23 @@ function setup() {
 }
 
 function makePageForEpisodes(episodeList) {
-  
-  const rootElem = document.getElementById("root");
+  const search = document.createElement("div");
+  document.body.appendChild(search);
+  const searchInput = document.createElement("input");
+  search.appendChild(searchInput);
+  const rootElem = document.createElement("div");
+  document.body.appendChild(rootElem);
   const copyWriter = document.createElement("div");
   copyWriter.classList.add("copywriter");
   copyWriter.innerHTML = `<p>All data is from <a href="https://www.tvmaze.com/" target="_blank">TVmaze.com</a></p>`;
   document.body.appendChild(copyWriter);
   episodeList.forEach((episode) => {
-    if(episode.season < 10) {
-        episode.season = " 0" + episode.season;
-        }
-      if(episode.number < 10) {
-        episode.number = " 0" + episode.number;
-          }
+    if (episode.season < 10) {
+      episode.season = " 0" + episode.season;
+    }
+    if (episode.number < 10) {
+      episode.number = " 0" + episode.number;
+    }
     const episodeElem = document.createElement("div");
     episodeElem.style.border = "1px solid black";
     episodeElem.style.margin = "10px";
