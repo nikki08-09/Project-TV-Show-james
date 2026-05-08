@@ -1,5 +1,11 @@
 //You can edit ALL of the code here
 async function setup() {
+  const allShows = await fetch("https://api.tvmaze.com/shows")
+    .then((response) => response.json())
+    .catch((error) => {
+      document.body.innerHTML = `<p style="color: red;">Error fetching shows: ${error.message}</p>`;
+      return [];
+    });
   const allEpisodes = await fetch("https://api.tvmaze.com/shows/82/episodes")
     .then((response) => response.json())
     .catch((error) => {
