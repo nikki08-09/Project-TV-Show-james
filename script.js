@@ -19,6 +19,34 @@ async function setup() {
     `;
     return;
   }
+  const app = document.createElement("div");
+  document.body.appendChild(app);
+
+  const topBar = document.createElement("div");
+  topBar.style.padding = "20px";
+  topBar.style.backgroundColor = "rgb(37, 102, 140)";
+  topBar.style.display = "flex";
+  topBar.style.gap = "10px";
+  topBar.style.alignItems = "center";
+  app.appendChild(topBar);
+
+  const showSelect = document.createElement("select");
+  topBar.appendChild(showSelect);
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Select a show";
+  showSelect.appendChild(defaultOption);
+
+  allShows.forEach((show) => {
+    const option = document.createElement("option");
+    option.value = show.id;
+    option.textContent = show.name;
+    showSelect.appendChild(option);
+  });
+
+  const content = document.createElement("div");
+  app.appendChild(content);
 }
 
 window.onload = setup;
