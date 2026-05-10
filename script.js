@@ -19,6 +19,7 @@ async function setup() {
     `;
     return;
   }
+  allShows.sort((a, b) => a.name.localeCompare(b.name));
   const app = document.createElement("div");
   document.body.appendChild(app);
 
