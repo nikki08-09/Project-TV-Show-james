@@ -47,6 +47,41 @@ async function setup() {
 
   const content = document.createElement("div");
   app.appendChild(content);
+
+  showSelect.addEventListener("change", async (event) => {
+    const selectedShowId = event.target.value;
+
+    content.innerHTML = "";
+
+    if (!selectedShowId) {
+      makePageForShows(allShows, content);
+      return;
+    }
+
+    const episodes = await fetch(
+      `https://api.tvmaze.com/shows/${selectedShowId}/episodes`,
+    )
+      .then((response) => response.json())
+      .catch((error) => {
+        content.innerHTML = `
+    <p style="color:red;">
+    Error fetching episodes: ${error.message}
+    </p>
+    `;
+        return [];
+      });
+
+    if (!Array.isArray(episodes)) {
+      content.innerHTML = `
+    <p style="color:red;">
+    Unexpected episode format
+    </p>
+    `;
+      return;
+    }
+
+    makePageForEpisodes(episodes, content);
+  });
 }
 
 window.onload = setup;
